@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">MoviesWatch</string>
+    <string name="popular_title">BEST POPULAR FILMS AND SERIALS</string>
+    <string name="best_actor">BEST ACTORS</string>
+    <string name="sample_detail_title">FANTASTIC BEASTS AND WHERE TO FIND THEM</string>
+    <string name="story_line">STORYLINE</string>
+    <string name="detail_overview">A first-time captain leads a convoy of allied ships carrying thousands of soldiers
+    across the treacherous waters of the “Black Pit” to the front lines of WW2. With no air cover protection for 5 days,
+    the captain and his convoy must battle the surrounding enemy Nazi
+    U-boats in order to give the allies a chance to win the war."</string>
+    <string name="play_trailer">PLAY TRAILER</string>
+    <string name="rate_movie">RATE MOVIE</string>
+    <string name="actors">ACTORS</string>
+    <string name="creators">CREATORS</string>
+    <string name="about_film">ABOUT FILMS</string>
+    <string name="original_title">Original Title</string>
+    <string name="type">Type</string>
+    <string name="production">Production</string>
+    <string name="premiere">Premiere</string>
+    <string name="description">Description</string>
+</resources>

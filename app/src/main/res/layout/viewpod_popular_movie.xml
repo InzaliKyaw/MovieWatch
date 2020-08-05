@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.movieswatch.view.viewpods.PopularMovieViewPod xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/popularTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/popular_title"
+        android:textColor="@color/fade_background"
+        android:textSize="18dp">
+
+    </TextView>
+
+    <HorizontalScrollView
+        android:id="@+id/popularScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPopularMovies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:popularMovies="item_popular_movie"/>
+    </HorizontalScrollView>
+</com.example.movieswatch.view.viewpods.PopularMovieViewPod>

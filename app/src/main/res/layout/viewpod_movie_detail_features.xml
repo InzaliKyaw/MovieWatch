@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.movieswatch.view.viewpods.MovieDetailFeaturesViewPod xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp">
+
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:layout_gravity="left|center_vertical"
+            android:src="@drawable/ic_clock"/>
+
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/merriweather_regular"
+            android:text="2h 13min"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            app:singleLine="false">
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/merriweather_regular"
+                android:text="Family"
+                android:textColor="@color/white"
+                android:textSize="14dp">
+
+            </com.google.android.material.chip.Chip>
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/merriweather_regular"
+                android:text="Fantasy"
+                android:textColor="@color/white"
+                android:textSize="14dp">
+
+            </com.google.android.material.chip.Chip>
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/merriweather_regular"
+                android:text="Adventure"
+                android:textColor="@color/white"
+                android:textSize="14dp">
+
+            </com.google.android.material.chip.Chip>
+        </com.google.android.material.chip.ChipGroup>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="end"
+            android:padding="10dp"
+            android:src="@drawable/ic_heart" />
+
+
+</com.example.movieswatch.view.viewpods.MovieDetailFeaturesViewPod>

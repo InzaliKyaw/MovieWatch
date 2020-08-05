@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include android:id="@+id/vpMovieDetailPoster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/viewpod_movie_detail_poster">
+            </include>
+
+            <include android:id="@+id/movieDetailFeaturesViewPod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/viewpod_movie_detail_features">
+            </include>
+
+            <include
+                android:id="@+id/vpMovieStoryLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/viewpod_movie_story_line">
+            </include>
+
+
+           <HorizontalScrollView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+           </HorizontalScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/detail_background"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/standard_margin"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:fontFamily="@font/merriweather_regular"
+                    android:text="@string/actors"
+                    android:textColor="@color/fade_background"
+                    android:textSize="18dp">
+
+                </TextView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvActorDetail"
+                    android:layout_marginLeft="@dimen/standard_margin"
+                    android:layout_marginBottom="@dimen/standard_margin"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/standard_margin"
+                android:layout_marginTop="@dimen/standard_margin"
+                android:text="@string/about_film"
+                android:textSize="@dimen/standard_heading"
+                android:textColor="@color/fade_background"
+                android:fontFamily="@font/merriweather_regular"
+                >
+            </TextView>
+
+            <include android:id="@+id/vpAboutFilm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/viewpod_movie_detail_about_films">
+
+            </include>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/detail_background"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/standard_margin"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/merriweather_regular"
+                    android:text="@string/creators"
+                    android:textColor="@color/fade_background"
+                    android:textSize="18dp">
+
+                </TextView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCreatorDetail"
+                    android:layout_marginLeft="@dimen/standard_margin"
+                    android:layout_marginBottom="@dimen/standard_margin"
+                    android:layout_marginTop="@dimen/standard_margin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

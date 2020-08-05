@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".activity.MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include android:id="@+id/slideMovieViewPod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/viewpod_slide_movie">
+
+            </include>
+
+            <include android:id="@+id/vpPopular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/slideMovieViewPod"
+                layout="@layout/viewpod_popular_movie"
+                >
+
+            </include>
+
+            <include android:id="@+id/vpGenresMovie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/vpPopular"
+                layout="@layout/viewpod_genre_movies"/>
+
+            <include android:id="@+id/vpActor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/vpGenresMovie"
+                layout="@layout/viewpod_actors"/>
+
+    </RelativeLayout>
+
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

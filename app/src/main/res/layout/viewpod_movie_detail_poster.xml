@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.movieswatch.view.viewpods.MovieDetailPosterViewPod xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <FrameLayout
+        android:id="@+id/frameMovie"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <ImageView
+            android:id="@+id/detailImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@drawable/lensball640">
+
+        </ImageView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|bottom"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="80dp"
+            android:background="@drawable/ic_button_background"
+            android:text="2016"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="14dp"
+            >
+
+        </Button>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="80dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RatingBar
+                    android:id="@+id/detailRating"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:rating="3"
+                    android:progressTint="@color/gold"
+                    android:progressBackgroundTint="@color/golden_rod"
+                    android:secondaryProgressTint="@color/gold">
+
+                </RatingBar>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="38876 VOTES"
+                    android:textSize="14dp">
+
+                </TextView>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/merriweather_regular"
+                android:text="9,75"
+                android:textColor="@color/white"
+                android:textSize="24dp">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/detailMovieTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="10dp"
+            android:text="@string/sample_detail_title"
+            android:textColor="@color/white"
+            android:textSize="24dp">
+
+        </TextView>
+    </FrameLayout>
+
+</com.example.movieswatch.view.viewpods.MovieDetailPosterViewPod>
