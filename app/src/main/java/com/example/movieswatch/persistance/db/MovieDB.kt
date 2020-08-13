@@ -13,7 +13,7 @@ import com.example.movieswatch.persistance.typeconverters.*
 
 @Database(
     entities = [CastVO::class, CrewVO::class, GenresVO::class, ItemsVO::class, KnownForVO::class, PopularityResultsVO::class, PopularPersonResultsVO::class, GetMovieDetailResponse::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(

@@ -13,81 +13,81 @@ data class GetMovieDetailResponse(
 
 
     @SerializedName("adult")
-    var adult: Boolean,
+    var adult: Boolean = false,
 
     @SerializedName("backdrop_path")
-    var backdropPath: String,
+    var backdropPath: String = "",
 
     //check
     @SerializedName("belongs_to_collection")
-    val belongsToCollection:Int ?= null,
+    val belongsToCollection: Int? = null,
 
     @SerializedName("budget")
-    var budget: Int,
+    var budget: Int = 0,
 
     @SerializedName("genres")
-    var genres:ArrayList<GenresVO> = arrayListOf(),
+    var genres: ArrayList<GenresVO> = arrayListOf(),
 
     @SerializedName("homepage")
-    var homepage: String,
+    var homepage: String = "",
 
     @PrimaryKey
     @SerializedName("id")
-    var id: Integer,
+    var id: Int = 0,
 
     @SerializedName("imdb_id")
-    var imdbId: String,
+    var imdbId: String = "",
 
     @SerializedName("original_language")
-    var originalLanguage: String,
+    var originalLanguage: String = "",
 
     @SerializedName("original_title")
-    var originalTitle: String,
+    var originalTitle: String = "",
 
     @SerializedName("overview")
-    var overview: String,
+    var overview: String = "",
 
     @SerializedName("popularity")
-    var popularity: Double,
+    var popularity: Double = 0.0,
 
     @SerializedName("poster_path")
-    var posterPath: String,
+    var posterPath: String = "",
 
     @SerializedName("production_companies")
-    var productionCompanyVOS:ArrayList<ProductionCompanyVO> = arrayListOf(),
+    var productionCompanyVOS: ArrayList<ProductionCompanyVO> = arrayListOf(),
 
     @SerializedName("production_countries")
-    var productionCountryVOS:ArrayList<ProductionCountriesVO> = arrayListOf(),
+    var productionCountryVOS: ArrayList<ProductionCountriesVO> = arrayListOf(),
 
     @SerializedName("release_date")
-    var releaseDate: String,
+    var releaseDate: String = "",
 
     @SerializedName("revenue")
-    var revenue: Int,
+    var revenue: Int = 0,
 
     @SerializedName("runtime")
-    var runtime: Int,
+    var runtime: Int = 0,
 
     @SerializedName("spoken_languages")
-    var spokenLanguageVOS:ArrayList<SpokenLanguagesVO> = arrayListOf(),
+    var spokenLanguageVOS: ArrayList<SpokenLanguagesVO> = arrayListOf(),
 
     @SerializedName("status")
-    var status: String,
+    var status: String = "",
 
     @SerializedName("tagline")
-    var tagline: String,
+    var tagline: String = "",
 
     @SerializedName("title")
-    var title: String,
+    var title: String = "",
 
     @SerializedName("video")
-    var video: Boolean,
+    var video: Boolean = false,
 
     @SerializedName("vote_average")
-    var voteAverage: Double,
+    var voteAverage: Double = 0.0,
 
     @SerializedName("vote_count")
-    var voteCount: Int
+    var voteCount: Int = 0
 
 
-    )
+)

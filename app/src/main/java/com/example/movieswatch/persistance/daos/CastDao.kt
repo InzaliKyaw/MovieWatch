@@ -6,10 +6,10 @@ import com.example.movieswatch.data.vos.CastVO
 
 @Dao
 interface CastDao {
-    @Query("SELECT * FROM `castVO` ")
+    @Query("SELECT * FROM `cast_vo` ")
     fun getAllCast():LiveData<List<CastVO>>
 
-    @Query("DELETE FROM `castVO`")
+    @Query("DELETE FROM `cast_vo`")
     fun deleteAllCast()
 
     @Delete

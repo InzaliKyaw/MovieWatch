@@ -16,6 +16,11 @@ import com.example.movieswatch.adapters.MoviePagerAdapter
 import com.example.movieswatch.adapters.PopularActorAdapter
 import com.example.movieswatch.data.model.MovieModelImpl
 import com.example.movieswatch.data.model.MoviesModel
+import com.example.movieswatch.data.vos.CastVO
+import com.example.movieswatch.data.vos.CrewVO
+import com.example.movieswatch.mvp.presenters.DetailPresenter
+import com.example.movieswatch.mvp.presenters.DetailPresenterImpl
+import com.example.movieswatch.mvp.view.DetailView
 import com.example.movieswatch.network.responses.GetMovieDetailResponse
 import com.example.movieswatch.persistance.db.MovieDB
 import com.example.movieswatch.utils.IMAGE_BASE_URL
@@ -29,7 +34,7 @@ import kotlinx.android.synthetic.main.viewpod_movie_detail_poster.*
 import kotlinx.android.synthetic.main.viewpod_movie_story_line.*
 import retrofit2.http.Tag
 
-class MovieDetailActivity:AppCompatActivity() {
+class MovieDetailActivity:AppCompatActivity(),DetailView{
 
     private var mMovieModel: MoviesModel? = MovieModelImpl
     private lateinit var actorAdapter: ActorMovieDetailAdapter
@@ -39,14 +44,17 @@ class MovieDetailActivity:AppCompatActivity() {
     private lateinit var viewPodMovieDetailAboutFilmViewPod: MovieDetailAboutFilmViewPod
     private lateinit var data:GetMovieDetailResponse
     private lateinit var mTheDB: MovieDB
+    private var movieId:Int = 0
+    private lateinit var mDetailPresenter:DetailPresenter
+
 
     var Tag = "MovieDetailActivity"
 
     companion object{
 
-        fun newItent(context: Context): Intent {
+        fun newItent(context: Context,movieId:Int): Intent {
             val intent =  Intent(context, MovieDetailActivity::class.java)
-            //intent.putExtra("MovieID")
+            intent.putExtra("MovieID",movieId)
             return intent
         }
     }
@@ -55,39 +63,45 @@ class MovieDetailActivity:AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
+        setUpPresenter()
 
         actorAdapter = ActorMovieDetailAdapter()
         crewAdapter = CrewMovieDetailAdapter()
+        movieId = intent.getIntExtra("MovieID",0)
+        mDetailPresenter.onUiReady(this,movieId)
 
-        mMovieModel?.getMovieDetails(
-            onSuccess = {
-                mTheDB.movieDetailDao().insertAllMovieDetail(it)
-                Log.d(Tag, "Movie Detail"+it)
-
-                //setUpMovieDetailPosterViewPod(data)
-               // slideContainer.adapter = MoviePagerAdapter(it)
-            }, onError = {
-                Log.e(Tag,"Error")
-            }
-        )
-
-        mMovieModel?.getMovieDetailsActor(
-            onSuccess = {
-                //actorAdapter = ActorMovieDetailAdapter(it)
-                mTheDB.castDao().insetCastList(it)
-            }, onError = {
-                Log.e(Tag,"Error")
-            }
-        )
-
-        mMovieModel?.getMovieDetailsCrew(
-            onSuccess = {
-               // crewAdapter = CrewMovieDetailAdapter(it)
-                mTheDB.crewDao().insertCrewList(it)
-            }, onError = {
-                Log.e(Tag,"Error")
-            }
-        )
+//        mMovieModel?.getMovieDetails(
+//            movieId,
+//            onSuccess = {
+//                mTheDB.movieDetailDao().insertAllMovieDetail(it)
+//                //setUpMovieDetailPosterViewPod(data)
+//               // slideContainer.adapter = MoviePagerAdapter(it)
+//            }, onError = {
+//                Log.e(Tag,"Error")
+//            }
+//        )
+//
+//        mMovieModel?.getMovieDetailsActor(
+//            onSuccess = {
+//               // actorAdapter = ActorMovieDetailAdapter()
+//                mTheDB.castDao().insetCastList(it)
+//                Log.d(Tag, "Movie Detail"+it)
+//                //actorAdapter.setNewData(it.toMutableList())
+//            }, onError = {
+//                Log.e(Tag,"Error")
+//            }
+//        )
+//
+//        mMovieModel?.getMovieDetailsCrew(
+//            onSuccess = {
+//                //crewAdapter = CrewMovieDetailAdapter()
+//                mTheDB.crewDao().insertCrewList(it)
+//                Log.d(Tag, "Movie Detail"+it)
+//                //crewAdapter.setNewData(it.toMutableList())
+//            }, onError = {
+//                Log.e(Tag,"Error")
+//            }
+//        )
 
         //InsertDB_To_View
         mTheDB = MovieDB.getDBInstance(this)
@@ -102,26 +116,46 @@ class MovieDetailActivity:AppCompatActivity() {
 
                 crewAdapter.setNewData(it.toMutableList())
             })
+
         setUpCreatorRecyclerView(crewAdapter)
 
-        mTheDB.movieDetailDao().getAllMovieDetail().observe(this,
-            Observer {
-                it?.let { movieDetail ->
-                    setUpMovieDetailPosterViewPod(movieDetail)
-                }
-
-            })
+//        mTheDB.movieDetailDao().getMovieWithIdentity().observe(this,
+//            Observer {
+//                it?.let { movieDetail ->
+//                    setUpMovieDetailPosterViewPod(movieDetail)
+//                }
+//
+//            })
 
 
     }
+    fun setUpPresenter(){
+        mDetailPresenter = DetailPresenterImpl()
+        mDetailPresenter.initPresenter(this)
+    }
 
-    fun setUpMovieDetailPosterViewPod(data:GetMovieDetailResponse){
+    override fun displayDetail(movieDetail: GetMovieDetailResponse?) {
+        setUpMovieDetailPosterViewPod(movieDetail)
+    }
+
+    override fun displayActorList(actorList: List<CastVO>) {
+        actorAdapter.setNewData(actorList.toMutableList())
+
+    }
+
+    override fun displayCrewList(crewList: List<CrewVO>) {
+        crewAdapter.setNewData(crewList.toMutableList())
+    }
+
+
+
+    fun setUpMovieDetailPosterViewPod(data:GetMovieDetailResponse?){
 
         viewPodMovieDetailPosterViewPod = vpMovieDetailPoster as MovieDetailPosterViewPod
         viewPodMovieDetailStorylineViewPod = vpMovieStoryLine as MovieDetailStorylineViewPod
         viewPodMovieDetailAboutFilmViewPod = vpAboutFilm as MovieDetailAboutFilmViewPod
 
-        Log.d(Tag,"Data detatil"+data.originalTitle)
+        Log.d(Tag,"Data detatil"+data?.originalTitle)
         viewPodMovieDetailPosterViewPod.bindMoviePoster(data)
         viewPodMovieDetailStorylineViewPod.bindMovies(data)
         viewPodMovieDetailAboutFilmViewPod.bindAboutFilm(data)

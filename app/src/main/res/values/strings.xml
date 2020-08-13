@@ -18,4 +18,6 @@
     <string name="production">Production</string>
     <string name="premiere">Premiere</string>
     <string name="description">Description</string>
+    <string name="like_label">You like 3 Movies</string>
+    <string name="discover">Discover</string>
 </resources>

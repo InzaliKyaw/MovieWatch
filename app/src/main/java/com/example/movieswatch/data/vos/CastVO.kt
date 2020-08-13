@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 
-@Entity(tableName = "castVO")
+@Entity(tableName = "cast_vo")
 data class CastVO(
 
     @PrimaryKey(autoGenerate = true)

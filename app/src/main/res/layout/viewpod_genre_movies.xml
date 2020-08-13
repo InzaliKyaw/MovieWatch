@@ -9,6 +9,9 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/detail_background"
+            app:tabIndicatorColor="@color/golden_rod"
+            app:tabTextColor="@color/white"
             app:tabMode="scrollable"
             />
         <HorizontalScrollView

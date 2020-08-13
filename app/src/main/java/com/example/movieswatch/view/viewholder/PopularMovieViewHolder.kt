@@ -6,17 +6,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieswatch.data.vos.PopularityResultsVO
 import com.example.movieswatch.delegates.MovieListDelegates
+import com.example.movieswatch.network.responses.GetMovieDetailResponse
 import com.example.movieswatch.utils.IMAGE_BASE_URL
 import kotlinx.android.synthetic.main.item_popular_movie.view.*
 
-class PopularMovieViewHolder(itemView: View,delegates: MovieListDelegates) :RecyclerView.ViewHolder(itemView) {
+class PopularMovieViewHolder(itemView: View,delegates: MovieListDelegates) :BasePopularMovieViewHolder(itemView) {
 
     init {
         itemView.setOnClickListener {
-            delegates.onTapMovie()
+            mData?.let {
+                delegates.onTapMovie(550)
+            }
         }
     }
-        fun bindMovies( popularMovieList: PopularityResultsVO){
+       override fun bindMovies( popularMovieList: PopularityResultsVO){
 
             var TAG = "View Holder"
             var imageUrl:String = IMAGE_BASE_URL+"original"+popularMovieList.posterPath

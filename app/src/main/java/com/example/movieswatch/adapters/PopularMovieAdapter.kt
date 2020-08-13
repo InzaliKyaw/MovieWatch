@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movieswatch.R
 import com.example.movieswatch.data.vos.PopularityResultsVO
 import com.example.movieswatch.delegates.MovieListDelegates
+import com.example.movieswatch.view.viewholder.BasePopularMovieViewHolder
 import com.example.movieswatch.view.viewholder.PopularMovieViewHolder
 
-class PopularMovieAdapter(delegates: MovieListDelegates): RecyclerView.Adapter<PopularMovieViewHolder>() {
+class PopularMovieAdapter(delegates: MovieListDelegates):BaseRecyclerAdapter<BasePopularMovieViewHolder,PopularityResultsVO>() {
 
-    var mData:MutableList<PopularityResultsVO> = arrayListOf()
     val mDelegate: MovieListDelegates = delegates
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularMovieViewHolder {
@@ -18,23 +18,21 @@ class PopularMovieAdapter(delegates: MovieListDelegates): RecyclerView.Adapter<P
         return PopularMovieViewHolder(view,mDelegate)
     }
 
-    override fun getItemCount(): Int {
-        return mData.size
+
+
+    override fun onBindViewHolder(holder: BasePopularMovieViewHolder, position: Int) {
+        holder.bindMovies(mData[position])
 
     }
+    //    override fun getItemCount(): Int {
+//        return mData.size
+//
+//    }
 
-    fun setNewData(data:MutableList<PopularityResultsVO>){
-        mData = data
-        notifyDataSetChanged()
-    }
+
 
 //    fun appendNewData(data: List<PopularityResultsVO>){
 //        mData.addAll(data)
 //        notifyDataSetChanged()
 //    }
-
-    override fun onBindViewHolder(holder: PopularMovieViewHolder, position: Int) {
-        holder.bindMovies(mData[position])
-
-    }
 }

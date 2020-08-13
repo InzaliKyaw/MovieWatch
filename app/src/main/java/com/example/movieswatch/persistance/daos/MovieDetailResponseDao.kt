@@ -9,6 +9,9 @@ interface MovieDetailResponseDao {
     @Query("SELECT * FROM `GetMovieDetailResponse` ")
     fun getAllMovieDetail(): LiveData<GetMovieDetailResponse?>
 
+    @Query("SELECT * FROM `GetMovieDetailResponse`" )
+    fun getMovieWithIdentity():LiveData<GetMovieDetailResponse?>
+
     @Query("DELETE FROM `GetMovieDetailResponse`")
     fun deleteAllMovieDetail()
 

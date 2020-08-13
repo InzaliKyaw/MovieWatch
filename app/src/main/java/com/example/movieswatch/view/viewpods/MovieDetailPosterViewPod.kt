@@ -15,10 +15,10 @@ class MovieDetailPosterViewPod @JvmOverloads constructor(
         super.onFinishInflate()
     }
 
-    fun bindMoviePoster(data:GetMovieDetailResponse){
+    fun bindMoviePoster(data:GetMovieDetailResponse?){
 
-        detailMovieTitle.text = data.originalTitle
-        val imageUrl:String = IMAGE_BASE_URL +"original"+data.backdropPath
+        detailMovieTitle.text = data?.originalTitle
+        val imageUrl:String = IMAGE_BASE_URL +"original"+data?.backdropPath
         Glide.with(this)
             .load(imageUrl)
             .into(detailImage)

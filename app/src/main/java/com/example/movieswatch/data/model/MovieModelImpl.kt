@@ -1,142 +1,191 @@
 package com.example.movieswatch.data.model
 
+import android.annotation.SuppressLint
+import android.util.Log
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import com.example.movieswatch.data.vos.*
 import com.example.movieswatch.network.responses.GetMovieDetailResponse
-import com.example.movieswatch.persistance.db.MovieDB
-import com.example.movieswatch.utils.MOVIE_ID
+import com.example.movieswatch.network.responses.GetPopularMoviesResponse
+import com.example.movieswatch.utils.NO_INTERNET_CONNECTION
 import com.example.movieswatch.utils.PARAM_ACCESS_TOKEN
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.viewpod_genre_movies.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-object MovieModelImpl:MoviesModel,BaseModel() {
-    private lateinit var mTheDB: MovieDB
+object MovieModelImpl : MoviesModel, BaseModel() {
 
+    private val Tag = "izk"
+    private lateinit var mMoviesModel:MoviesModel
 
-
-
-    override fun getGenre(onSuccess: (List<GenresVO>) -> Unit, onError: (String) -> Unit) {
-        mDataAgents.getGenre(PARAM_ACCESS_TOKEN,
-            onSuccess = {
-                onSuccess.invoke(it)
-            },
-            onFailure = {
-                onError.invoke(it)
-            })
-    }
-
-    override fun getMovieDetailsActor(onSuccess: (List<CastVO>) -> Unit, onError: (String) -> Unit) {
-        mDataAgents.getMovieDetailActors(MOVIE_ID,PARAM_ACCESS_TOKEN,
-            onSuccess= {
-                onSuccess.invoke(it)
-            },onFailure= {
-                onError.invoke(it)
-            })
-
-    }
-
-    override fun getMovieDetailsCrew(onSuccess: (List<CrewVO>) -> Unit, onError: (String) -> Unit) {
-        mDataAgents.getMovieDetailCrew(MOVIE_ID,PARAM_ACCESS_TOKEN,
-            onSuccess= {
-                onSuccess.invoke(it)
-            },onFailure= {
-                onError.invoke(it)
+    @SuppressLint("CheckResult")
+    override fun getNowPlayingMovies(onError: (String) -> Unit): LiveData<List<PopularityResultsVO>> {
+        mMoviesApi.getNowPlayingMovie(PARAM_ACCESS_TOKEN).map {
+            it.results?.toList() ?: listOf()
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                mTheDB.popularMovieResultsDao().insertPopularMovieList(it)
+                Log.e(Tag, "Get Now Playing" + it)
+            }, {
+                onError(it.localizedMessage ?: NO_INTERNET_CONNECTION)
+                Log.e(Tag, "Get Now Playing" + "ERROR")
             })
 
+        return mTheDB.popularMovieResultsDao().getAllPopularMovie()
     }
 
-    override fun getPopularPesons(
-        onSuccess: (List<PopularPersonResultsVO>) -> Unit,
-        onError: (String) -> Unit
-    ) {
-        mDataAgents.getPopularPersons(PARAM_ACCESS_TOKEN,
-        onSuccess={
-            onSuccess.invoke(it)
-        },
-        onFailure = {
-            onError.invoke(it)
-        }    )
+    @SuppressLint("CheckResult")
+    override fun getGenre(onError: (String) -> Unit): LiveData<List<GenresVO>> {
+        mMoviesApi.getGenres(PARAM_ACCESS_TOKEN)
+            .map {
+                it.genresVO.toList()
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    mTheDB.genresDao().insertGenreList(it)
+                    Log.d(Tag, "Get Genre" + it)
+
+                }, {
+                    onError(it.localizedMessage ?: NO_INTERNET_CONNECTION)
+                    Log.d(Tag, "Get Genre" )
+
+                }
+            )
+        return mTheDB.genresDao().getAllGenre()
     }
 
 
-    override fun getNowPlayingMovies(
-        onSuccess: (List<PopularityResultsVO>) -> Unit,
-        onError: (String) -> Unit
-    ) {
-        mDataAgents.getPopularMovies(PARAM_ACCESS_TOKEN,
-            onSuccess={
-                onSuccess.invoke(it)
-            },
-            onFailure = {
-                onError.invoke(it)
-            })
-    }
-
-    override fun getPopularMovies(
-        onSuccess: (List<PopularityResultsVO>) -> Unit,
-        onError: (String) -> Unit
-    ) {
-        mDataAgents.getPopularMovies(PARAM_ACCESS_TOKEN,
-            onSuccess={
-                onSuccess.invoke(it)
-            },
-            onFailure = {
-                onError.invoke(it)
-            })
-    }
-
-    override fun getLists(onSuccess: (List<ItemsVO>) -> Unit,
-                          onError: (String) -> Unit) {
-        mDataAgents.getLists(1,PARAM_ACCESS_TOKEN,
-            onSuccess={
-                onSuccess.invoke(it)
-            },
-            onFailure = {
-                onError.invoke(it)
-            })
-    }
-
-    override fun getMovieDetails(onSuccess: (GetMovieDetailResponse) -> Unit,
-                          onError: (String) -> Unit) {
-        mDataAgents.getMovieDetail( MOVIE_ID ,PARAM_ACCESS_TOKEN,
-            onSuccess={
-                onSuccess.invoke(it)
-            },
-            onFailure = {
-                onError.invoke(it)
-            })
 
 
-    }
 
-//    @SuppressLint("CheckResult")
-//    override fun getDiscoverMovie(
-//        genreId:Int):LiveData<List<PopularityResultsVO>> {
-//        mDataAgents.getDiscoverMovie(GENRE_ID, PARAM_ACCESS_TOKEN)
-//
-//    }
-
-//    override fun getMoviesByGenre(genre:Int): LiveData<List<PopularityResultsVO>> {
-//        mDataAgents.getDiscoverMovies(genre,PARAM_ACCESS_TOKEN )
-//            .map {
-//                it.results?.toList()?: listOf() }
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe({
-//
-//                mTheDB.movieDao().insertAllMovies(it)
-//            },{
-//
-//            })
-//        return mTheDB.movieDao().getGenresMovies()
-//    }
-
+    @SuppressLint("CheckResult")
     override fun getDiscoverMovie(genreId: Int): LiveData<List<PopularityResultsVO>> {
-        mDataAgents.getDiscoverMovie(genreId, PARAM_ACCESS_TOKEN)
 
-        return mTheDB.allGenreDao().getGenresMovies()
+        mMoviesApi.getDiscoverMovies(genreId, PARAM_ACCESS_TOKEN)
+            .map{
+                it.results?.toList()?: listOf() }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+                mTheDB.allGenreDao().insertGenreList(it)
+            },{
+                Log.d(Tag, "Get Genre Movie" + it)
+
+            })
+        return mTheDB.allGenreDao().getAllMovies()
+    }
+
+
+    @SuppressLint("CheckResult")
+    override fun getPopularMovies(onError: (String) -> Unit): LiveData<List<PopularityResultsVO>> {
+        mMoviesApi.getPopularMovies(PARAM_ACCESS_TOKEN)
+            .map {
+                it.results?.toList() ?: listOf()
+            }
+            ?.subscribeOn(Schedulers.io())
+            ?.observeOn(AndroidSchedulers.mainThread())
+            ?.subscribe(
+                {
+                    mTheDB.popularMovieResultsDao().insertPopularMovieList(it)
+                    Log.d(Tag, "Get Popular Movie" + it)
+
+                }, {
+                    onError(it.localizedMessage ?: NO_INTERNET_CONNECTION)
+                    Log.d(Tag, "Get " + it)
+
+                }
+            )
+        return mTheDB.popularMovieResultsDao().getAllPopularMovie()
+    }
+
+    @SuppressLint("CheckResult")
+    override fun getPopularPesons(onError: (String) -> Unit): LiveData<List<PopularPersonResultsVO>> {
+        mMoviesApi.getPopularPersons(PARAM_ACCESS_TOKEN)
+            .map {
+                it.results?.toList() ?: listOf()
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                mTheDB.popularPersonDao().insertPopularPersonList(it)
+            }, {
+                onError(it.localizedMessage ?: NO_INTERNET_CONNECTION)
+            })
+
+        return mTheDB.popularPersonDao().getAllPopularPerson()
+    }
+
+
+
+
+    @SuppressLint("CheckResult")
+    override fun getMovieDetails(
+        movieId: Int,
+        onError: (String) -> Unit
+    ): LiveData<GetMovieDetailResponse?> {
+        mMoviesApi.getDetailMovies(movieId, PARAM_ACCESS_TOKEN)
+            .map {
+                it
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                mTheDB.movieDetailDao().insertAllMovieDetail(it)
+            },{
+                onError(it.localizedMessage ?: NO_INTERNET_CONNECTION)
+            })
+        return mTheDB.movieDetailDao().getMovieWithIdentity()
+
+    }
+
+    @SuppressLint("CheckResult")
+    override fun getMovieDetailsActor(
+        movieId: Int,
+        onError: (String) -> Unit
+    ): LiveData<List<CastVO>> {
+        mMoviesApi.getDetailMoviesActors(movieId, PARAM_ACCESS_TOKEN)
+            .map {
+                it.castVO?.toList()
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                mTheDB.castDao().insetCastList(it)
+            },{
+                onError(it.localizedMessage ?: NO_INTERNET_CONNECTION)
+            })
+        return mTheDB.castDao().getAllCast()
+
+
+    }
+
+    @SuppressLint("CheckResult")
+    override fun getMovieDetailsCrew(
+        movieId: Int,
+        onError: (String) -> Unit
+    ): LiveData<List<CrewVO>> {
+        mMoviesApi.getDetailMoviesActors(movieId, PARAM_ACCESS_TOKEN)
+            .map {
+                it.crewVO.toList()
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe( {
+                mTheDB.crewDao().insertCrewList(it)
+            },{
+            onError(it.localizedMessage ?: NO_INTERNET_CONNECTION)
+        })
+        return mTheDB.crewDao().getAllCrew()
     }
 
 
 
 }
-
-

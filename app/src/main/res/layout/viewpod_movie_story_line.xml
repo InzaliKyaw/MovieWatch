@@ -38,75 +38,52 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/standard_margin"
-        android:layout_marginBottom="10dp"
+        android:weightSum="2"
         android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            app:cardCornerRadius="20dp"
-            android:background="@color/golden_rod"
-            app:cardElevation="8dp">
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="@color/golden_rod"
+            android:text="@string/play_trailer"
+            android:textColor="@color/white"
+            app:cornerRadius="30dp"
+            app:icon="@drawable/ic_play"
+            app:iconTint="@color/background"
+            style="Widget.MaterialComponents.Button.TextButton.Icon"
+            >
 
-            <LinearLayout
-                android:id="@+id/lnlPlayTrailer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:background="@color/golden_rod">
+        </com.google.android.material.button.MaterialButton>
 
-                <ImageView
-                    android:layout_width="@dimen/icon_size"
-                    android:layout_height="@dimen/icon_size" />
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center_vertical"
+            android:text="@string/rate_movie"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/pure_black"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp"
+            app:cornerRadius="30dp"
+            app:icon="@drawable/ic_star"
+            app:iconTint="@color/golden_rod"
+            style="Widget.MaterialComponents.Button.TextButton.Icon">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/merriweather_regular"
-                    android:text="@string/play_trailer"
-                    android:textColor="@color/white"
-                    android:textSize="16dp">
-
-                </TextView>
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:background="@color/background">
-
-                <ImageView
-                    android:layout_width="@dimen/icon_size"
-                    android:layout_height="@dimen/icon_size" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/merriweather_regular"
-                    android:text="@string/rate_movie"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="16dp">
-
-                </TextView>
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.button.MaterialButton>
 
     </LinearLayout>
 </com.example.movieswatch.view.viewpods.MovieDetailStorylineViewPod>

@@ -6,10 +6,10 @@ import com.example.movieswatch.data.vos.CrewVO
 
 @Dao
 interface CrewDao {
-    @Query("SELECT * FROM `crewVO` ")
+    @Query("SELECT * FROM `crew_vo` ")
     fun getAllCrew():LiveData<List<CrewVO>>
 
-    @Query("DELETE FROM `crewVO`")
+    @Query("DELETE FROM `crew_vo`")
     fun deleteAllCrew()
 
     @Delete

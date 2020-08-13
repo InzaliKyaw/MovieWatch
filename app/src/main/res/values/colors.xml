@@ -6,9 +6,13 @@
     <color name="gold">#FFD700</color>
     <color name="fade_gold">#33FFD700</color>
     <color name="golden_rod">#DAA520</color>
-    <color name="background">#0e0e0e</color>
+    <color name="background">#182233</color>
     <color name="detail_background">#1e2633</color>
+    <color name="detail_70">#B31e2633</color>
+    <color name="white_70">#B3FFFFFF</color>
     <color name="fade_background">#58676c</color>
+    <color name="silver">#C0C0C0</color>
     <color name="white">#FFFFFF</color>
+    <color name="pure_black">#000000</color>
 
 </resources>

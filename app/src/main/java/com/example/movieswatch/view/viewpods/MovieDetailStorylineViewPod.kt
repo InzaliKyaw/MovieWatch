@@ -13,8 +13,8 @@ class MovieDetailStorylineViewPod @JvmOverloads constructor(
         super.onFinishInflate()
     }
 
-    fun bindMovies(data:GetMovieDetailResponse){
-        storyLine.text = data.overview
+    fun bindMovies(data:GetMovieDetailResponse?){
+        storyLine.text = data?.overview
     }
 
 }

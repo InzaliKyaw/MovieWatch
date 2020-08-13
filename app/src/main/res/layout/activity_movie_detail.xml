@@ -36,38 +36,40 @@
             </include>
 
 
-           <HorizontalScrollView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content">
 
-           </HorizontalScrollView>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/detail_background"
-                android:orientation="vertical">
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:background="@color/detail_background"
+                   android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/standard_margin"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:fontFamily="@font/merriweather_regular"
-                    android:text="@string/actors"
-                    android:textColor="@color/fade_background"
-                    android:textSize="18dp">
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginLeft="@dimen/standard_margin"
+                       android:layout_marginTop="@dimen/standard_margin"
+                       android:fontFamily="@font/merriweather_regular"
+                       android:text="@string/actors"
+                       android:textColor="@color/fade_background"
+                       android:textSize="18dp">
 
-                </TextView>
+                   </TextView>
+                   <HorizontalScrollView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvActorDetail"
-                    android:layout_marginLeft="@dimen/standard_margin"
-                    android:layout_marginBottom="@dimen/standard_margin"
-                    android:layout_marginTop="@dimen/standard_margin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
-            </LinearLayout>
+                   <androidx.recyclerview.widget.RecyclerView
+                       android:id="@+id/rvActorDetail"
+                       android:layout_marginLeft="@dimen/standard_margin"
+                       android:layout_marginBottom="@dimen/standard_margin"
+                       android:layout_marginTop="@dimen/standard_margin"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       />
+                   </HorizontalScrollView>
+
+               </LinearLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"

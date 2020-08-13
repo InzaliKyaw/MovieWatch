@@ -6,7 +6,23 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     tools:context=".activity.MainActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+        <Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:title="@string/discover"
+            android:textAlignment="gravity"
+            android:titleTextColor="@color/white"
+            android:gravity="center"
+            android:background="@color/detail_background">
 
+        </Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,6 +37,7 @@
                 layout="@layout/viewpod_slide_movie">
 
             </include>
+
 
             <include android:id="@+id/vpPopular"
                 android:layout_width="match_parent"

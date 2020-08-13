@@ -13,8 +13,8 @@ class MovieDetailAboutFilmViewPod @JvmOverloads constructor(
         super.onFinishInflate()
     }
 
-    fun bindAboutFilm(data: GetMovieDetailResponse){
-        originalTitleTxT.text = data.originalTitle
-        productionTxt.text = data.productionCompanyVOS.get(2).name
-        descriptionTxt.text = data.overview    }
+    fun bindAboutFilm(data: GetMovieDetailResponse?){
+        originalTitleTxT.text = data?.originalTitle
+        productionTxt.text = data?.productionCompanyVOS?.get(2)?.name
+        descriptionTxt.text = data?.overview    }
 }

@@ -9,9 +9,9 @@ data class GetMovieDetailActor (
     @SerializedName("id")
     var id:Int,
 
-    @SerializedName("castVO")
+    @SerializedName("cast")
     var castVO:ArrayList<CastVO> = arrayListOf(),
 
-    @SerializedName("crewVO")
+    @SerializedName("crew")
     var crewVO:ArrayList<CrewVO> = arrayListOf()
 )
